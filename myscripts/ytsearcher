@@ -1,0 +1,21 @@
+#/bin/bash
+searchUrl="http://youtube.com/results?search_query="
+
+cat $HOME/misc/searchHistory.txt | dmenu -l 10 >> $HOME/misc/searchHistory.txt
+
+echo $some
+
+words=$(tail -n 1 $HOME/misc/searchHistory.txt)
+echo $words
+
+if [[ $words = "" ]]; then
+    exit
+fi
+
+for w in $words;do
+    searchUrl=$searchUrl$w+;
+    done;
+
+echo $searchUrl
+
+surf $searchUrl

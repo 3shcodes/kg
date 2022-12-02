@@ -1,0 +1,4 @@
+#! /bin/bash
+dds="http://duckduckgo.com/?q="
+cat $HOME/misc/searchHistory.txt | dmenu -l 5 | awk -v url=$dds ' { printf "%s",url } END { for(i=1;i<=NF;i++)  printf "%s+",$i } ' | xargs -r surf
+#cat $HOME/misc/searchHistory.txt | dmenu -l 5 | awk -v url=$dds ' { for(i=1;i<=NF;i++)  printf "%s+",$i } END printf "%s%s",url,$1 ' | awk -v url=$dds '{ printf "%s%s",url,$1 }' | xargs -r surf

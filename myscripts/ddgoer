@@ -1,0 +1,16 @@
+#/bin/bash
+searchUrl="http://duckduckgo.com/?q="
+
+echo | dmenu >> searchHistory.txt
+
+words=$(tail -n 1 searchHistory.txt)
+echo $words
+
+for w in $words;do
+    searchUrl=$searchUrl$w+;
+    done;
+
+echo $searchUrl
+
+surf $searchUrl
+

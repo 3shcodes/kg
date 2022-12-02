@@ -1,0 +1,27 @@
+#! /bin/bash
+
+dds="duckduckgo.com/?q="
+yts="http://youtube.com/results?search_query="
+
+function argTaker(){
+    sin=$1
+    srl=$2
+    tac $HOME/misc/watchHistory/$sin.txt | dmenu -l 10  | tee -a $HOME/misc/watchHistory/$sin.txt | awk -v url=$srl '{ printf "%s",url } END { for (i=1;i<=NF;i++) printf "%s+",$i } '  | xargs -r surf
+}
+
+function searcher(){
+    sin=$1
+    srl=$2
+    cat $HOME/misc/watchHistory/$sin.txt | dmenu -l 10 < /dev/null  | tee -a $HOME/misc/watchHistory/$sin.txt | awk -v url=$srl '{ printf "%s",url } END { for (i=1;i<=NF;i++) printf "%s+",$i } '  | xargs -r surf
+}
+
+if [[ $1 = "y" ]];then
+    echo $1
+    argTaker yt $yts
+elif [[ $1 = "d" ]];then
+    argTaker dd $dds
+elif [[ $1 = "f" ]];then
+    searcher dd $dds
+else
+    exit
+fi
